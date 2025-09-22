@@ -68,7 +68,7 @@ class _CornerWidgetState extends State<CornerWidget>
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF870122),
+            color: AppColors.cherry,
           ),
         ),
       ),

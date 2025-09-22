@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/constants.dart';
 import 'corner_widget.dart';
 import 'my_way.dart';
+import 'future_plans.dart';
 
 void main() {
   runApp(const MyApp());
@@ -64,28 +65,22 @@ class MyHomePage extends StatelessWidget {
                         ),
                       ),
                     ],
-                    
+
                     // Основной контент
                     Column(
                       children: [
                         _buildMainContent(context, isMobile, isTablet),
-                        
+
                         // Таймлайн развития
                         const DevelopmentTimeline(),
-                        
+
                         // Планы на будущее
-                        _buildFuturePlansSection(),
-                        
+                        buildFuturePlansSection(),
+
                         // Добавляем отступ внизу
                         SizedBox(height: isMobile ? 100 : 200),
                       ],
                     ),
-
-                    // Фотография (только на десктопе и планшете)
-                    if (!isMobile) _buildProfilePhoto(isTablet),
-
-                    // Мобильная навигация
-                    if (isMobile) _buildMobileNavigation(),
                   ],
                 ),
               ),
@@ -104,193 +99,35 @@ class MyHomePage extends StatelessWidget {
         right: isMobile ? AppSpacing.lg : (isTablet ? 100 : 170),
         bottom: isMobile ? 60 : 100,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Привет, я\u00A0Рузанна.\nFlutter разработчик',
-            style: Theme.of(
-              context,
-            ).textTheme.headlineMedium?.copyWith(fontSize: isMobile ? 22 : 25),
-          ),
-          SizedBox(height: isMobile ? AppSpacing.md : AppSpacing.lg),
-          Text(
-            'Создаю красивые и\u00A0производительные мобильные приложения '
-            'на\u00A0Flutter. Специализируюсь на\u00A0кроссплатформенной разработке, '
-            '3D-интеграции и\u00A0современном UI/UX дизайне.',
-            style: Theme.of(
-              context,
-            ).textTheme.bodyLarge?.copyWith(fontSize: isMobile ? 14 : 16),
-          ),
-          SizedBox(height: isMobile ? AppSpacing.lg : AppSpacing.xl),
-          _buildActionButtons(isMobile),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFuturePlansSection() {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 20),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            AppColors.primaryDark.withOpacity(0.9),
-            AppColors.primaryDark,
-          ],
-        ),
-      ),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1000),
-          child: Column(
-            children: [
-              // Заголовок раздела
-              const Text(
-                'Планы на будущее',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  height: 1.2,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'Направления развития и новые вызовы',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white70,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 40),
-
-              // Сетка планов
-              GridView.count(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-                childAspectRatio: 3,
-                children: [
-                  _buildPlanCard(
-                    icon: Icons.microwave_sharp,
-                    title: 'Архитектура микросервисов',
-                    subtitle: 'Глубокое изучение distributed systems',
-                  ),
-                  _buildPlanCard(
-                    icon: Icons.leak_add_rounded,
-                    title: 'AI/ML экспертиза',
-                    subtitle: 'Специализация на ИИ в мобильных приложениях',
-                  ),
-                  _buildPlanCard(
-                    icon: Icons.manage_accounts,
-                    title: 'Продуктовое мышление',
-                    subtitle: 'Развитие навыков продакт-менеджмента',
-                  ),
-                ],
-              ),
-
-              // Декоративный элемент
-              const SizedBox(height: 40),
-              Container(
-                width: 100,
-                height: 4,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.transparent,
-                      AppColors.accentTeal,
-                      Colors.transparent,
-                    ],
-                  ),
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPlanCard({
-    required IconData icon,
-    required String title,
-    required String subtitle,
-  }) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: AppColors.secondaryDark.withOpacity(0.3),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: AppColors.accentTeal.withOpacity(0.3),
-          width: 1,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.accentTeal.withOpacity(0.1),
-            blurRadius: 10,
-            spreadRadius: 1,
-          ),
-        ],
-      ),
       child: Row(
         children: [
-          // Эмодзи
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              color: AppColors.accentTeal.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: AppColors.accentTeal.withOpacity(0.4),
-                width: 1,
-              ),
-            ),
-            child: Center(
-              child: Icon(
-                icon,
-                color: AppColors.accentTeal,
-                size: 24,
-              ),
-            ),
-          ),
-          const SizedBox(width: 16),
-
-          // Текст
-          Expanded(
+          Flexible(
+            flex: 2,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                  'Привет, я\u00A0Рузанна.\nFlutter разработчик',
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontSize: isMobile ? AppSpacing.lg : AppSpacing.xl,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: isMobile ? AppSpacing.md : AppSpacing.lg),
                 Text(
-                  subtitle,
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(0.8),
-                    fontSize: 14,
-                  ),
+                  'Создаю красивые и\u00A0производительные мобильные приложения '
+                  'на\u00A0Flutter. Специализируюсь на\u00A0кроссплатформенной разработке, '
+                  '3D-интеграции и\u00A0современном UI/UX дизайне.',
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyLarge?.copyWith(fontSize: isMobile ? 14 : 16),
                 ),
+                SizedBox(height: isMobile ? AppSpacing.lg : AppSpacing.xl),
+                _buildActionButtons(isMobile),
               ],
             ),
           ),
+          // Фотография (только на десктопе и планшете)
+          if (!isMobile) Flexible(flex: 1, child: _buildProfilePhoto(isTablet)),
         ],
       ),
     );
@@ -320,10 +157,10 @@ class MyHomePage extends StatelessWidget {
   Widget _buildProfilePhoto(bool isTablet) {
     return Positioned(
       top: 70,
-      right: isTablet ? 50 : 150,
+      right: isTablet ? 50 : 100,
       child: Container(
-        width: isTablet ? 150 : 200,
-        height: isTablet ? 150 : 200,
+        width: isTablet ? 200 : 330,
+        height: isTablet ? 200 : 330,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(70),
           image: const DecorationImage(
@@ -341,48 +178,5 @@ class MyHomePage extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildMobileNavigation() {
-    return Positioned(
-      bottom: AppSpacing.lg,
-      left: 0,
-      right: 0,
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-        padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          color: AppColors.secondaryDark.withOpacity(0.8),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.white.withOpacity(0.2)),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _MobileNavButton(icon: Icons.work, label: 'Проекты'),
-            _MobileNavButton(icon: Icons.code, label: 'Навыки'),
-            _MobileNavButton(icon: Icons.email, label: 'Контакты'),
-          ],
-        ),
-      ),
-    );
-  }
 }
 
-class _MobileNavButton extends StatelessWidget {
-  final IconData icon;
-  final String label;
-
-  const _MobileNavButton({required this.icon, required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, color: Colors.white, size: 24),
-        const SizedBox(height: 4),
-        Text(label, style: const TextStyle(color: Colors.white, fontSize: 12)),
-      ],
-    );
-  }
-}

@@ -360,7 +360,7 @@ class TimelineCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 30),
+      margin: const EdgeInsets.symmetric(vertical: 50),
       child: Stack(
         alignment: Alignment.center,
         children: [

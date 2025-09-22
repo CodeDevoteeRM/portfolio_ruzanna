@@ -6,14 +6,15 @@ class AppColors {
   static const Color accentTeal = Color(0xFF20C997);
   static const Color textPrimary = Colors.white;
   static const Color textSecondary = Color(0xFF94A3B8);
+  static const Color cherry = Color(0xFF950025);
 }
 
 class AppSpacing {
-  static const double xs = 4.0; // extra small
-  static const double sm = 8.0; // small
-  static const double md = 16.0; // medium
-  static const double lg = 24.0; // large
-  static const double xl = 32.0; // extra large
+  static const double xs = 6.0; // extra small
+  static const double sm = 12.0; // small
+  static const double md = 20.0; // medium
+  static const double lg = 30.0; // large
+  static const double xl = 40.0; // extra large
 }
 
 class AppBreakpoints {
