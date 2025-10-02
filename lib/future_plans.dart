@@ -6,11 +6,11 @@ Widget buildFuturePlansSection() {
     width: double.infinity,
     padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 20),
     decoration: BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [AppColors.primaryDark.withOpacity(0.9), AppColors.primaryDark],
-      ),
+      // gradient: LinearGradient(
+      //   begin: Alignment.topCenter,
+      //   end: Alignment.bottomCenter,
+      //   colors: [AppColors.primaryDark.withOpacity(0.9), AppColors.primaryDark],
+      // ),
     ),
     child: Center(
       child: ConstrainedBox(
@@ -25,6 +25,7 @@ Widget buildFuturePlansSection() {
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
                 height: 1.2,
+                fontFamily: 'Bulbasaur'
               ),
               textAlign: TextAlign.center,
             ),

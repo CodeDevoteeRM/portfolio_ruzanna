@@ -76,6 +76,7 @@ class _DevelopmentTimelineState extends State<DevelopmentTimeline> {
                     fontSize: AppSpacing.lg,
                     color: AppColors.accentTeal,
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'Bulbasaur'
                   ),
                 ),
                 isMobile ? _buildMobileLayout() : _buildDesktopLayout(),

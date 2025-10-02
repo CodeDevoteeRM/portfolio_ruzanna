@@ -45,48 +45,72 @@ class MyHomePage extends StatelessWidget {
     final isTablet = screenWidth < AppBreakpoints.tablet;
 
     return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return SingleChildScrollView(
+      backgroundColor: AppColors.primaryDark,
+      body: Stack(
+        children: [
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/pngwing2.png'),
+                fit: BoxFit.cover,
+                opacity: 0.7,
+              ),
+            ),
+          ),
+
+          SingleChildScrollView(
             child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              constraints: BoxConstraints(
+                minHeight: MediaQuery.of(context).size.height,
+              ),
               child: Container(
-                color: AppColors.primaryDark,
-                child: Stack(
+                color: Colors.transparent,
+                child: Column(
                   children: [
-                    if (!isMobile) ...[
-                      const Positioned(
-                        top: 0,
-                        left: 0,
-                        child: CornerWidget(
-                          text: "PORTFOLIO",
-                          alignment: Alignment.topLeft,
-                          inverted: true,
-                        ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 20, left: 30),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.flutter_dash_outlined,
+                            size: 37,
+                            color: AppColors.accentTeal,
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            'Рузанна Малхасян',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'Bulbasaur',
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-
-                    // Основной контент
-                    Column(
-                      children: [
-                        _buildMainContent(context, isMobile, isTablet),
-
-                        // Таймлайн развития
-                        const DevelopmentTimeline(),
-
-                        // Планы на будущее
-                        buildFuturePlansSection(),
-
-                        // Добавляем отступ внизу
-                        SizedBox(height: isMobile ? 100 : 200),
-                      ],
                     ),
+
+                    _buildMainContentV2(context, isTablet),
+                    const DevelopmentTimeline(),
+                    buildFuturePlansSection(),
+                    SizedBox(height: isMobile ? 100 : 200),
                   ],
                 ),
               ),
             ),
-          );
-        },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMainContentV2(BuildContext context, bool isTablet) {
+    return Container(
+      child: Row(
+        children: [
+          //_buildProfilePhoto(isTablet)
+        ],
       ),
     );
   }
@@ -126,8 +150,9 @@ class MyHomePage extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(width: 50),
           // Фотография (только на десктопе и планшете)
-          if (!isMobile) Flexible(flex: 1, child: _buildProfilePhoto(isTablet)),
+          // if (!isMobile) Flexible(flex: 1, child: _buildProfilePhoto(isTablet)),
         ],
       ),
     );
@@ -154,29 +179,22 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildProfilePhoto(bool isTablet) {
-    return Positioned(
-      top: 70,
-      right: isTablet ? 50 : 100,
-      child: Container(
-        width: isTablet ? 200 : 330,
-        height: isTablet ? 200 : 330,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(70),
-          image: const DecorationImage(
-            image: AssetImage('assets/photo1.jpeg'),
-            fit: BoxFit.cover,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.3),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+  // Widget _buildProfilePhoto(bool isTablet) {
+  //   return Positioned(
+  //     top: 70,
+  //     right: isTablet ? 50 : 100,
+  //     child: Container(
+  //       width: isTablet ? 200 : 330,
+  //       height: isTablet ? 200 : 330,
+  //       decoration: BoxDecoration(
+  //         borderRadius: BorderRadius.circular(70),
+  //         image: const DecorationImage(
+  //           image: AssetImage('assets/pngwing.png'),
+  //           fit: BoxFit.cover,
+  //         ),
 
+  //       ),
+  //     ),
+  //   );
+  // }
+}
